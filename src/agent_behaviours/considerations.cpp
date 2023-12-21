@@ -19,7 +19,11 @@ void UtilityAIConsiderations::_bind_methods() {
     ClassDB::bind_method(D_METHOD("set_score", "score"), &UtilityAIConsiderations::set_score);
     ClassDB::bind_method(D_METHOD("get_score"), &UtilityAIConsiderations::get_score);
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "score", PROPERTY_HINT_NONE ), "set_score","get_score");
-    
+
+    ClassDB::bind_method(D_METHOD("set_weight", "weight"), &UtilityAIConsiderations::set_weight);
+    ClassDB::bind_method(D_METHOD("get_weight"), &UtilityAIConsiderations::get_weight);
+    ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "weight", PROPERTY_HINT_NONE ), "set_weight","get_weight");
+
 
 }
 
@@ -29,6 +33,7 @@ void UtilityAIConsiderations::_bind_methods() {
 UtilityAIConsiderations::UtilityAIConsiderations() {
     _has_vetoed = false;
     _score = 0.0;
+    _weight = 1.0;
 }
 
 
@@ -56,6 +61,14 @@ void UtilityAIConsiderations::set_score( double score ) {
 
 double UtilityAIConsiderations::get_score() const {
     return _score;
+}
+
+void UtilityAIConsiderations::set_weight( double weight ) {
+    _weight = weight;
+}
+
+double UtilityAIConsiderations::get_weight() const {
+    return _weight;
 }
 
 double UtilityAIConsiderations::evaluate() { 

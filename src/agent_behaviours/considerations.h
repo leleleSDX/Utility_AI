@@ -19,7 +19,8 @@ private:
 protected:
     static void _bind_methods();
 
-    double _score;
+    double _score;    
+    double _weight;
     bool _has_vetoed;
 
 public:
@@ -35,6 +36,9 @@ public:
     void set_score( double score );
     double get_score() const;
 
+    void set_weight( double weight );
+    double get_weight() const;
+            
     // Handling functions.
 
     virtual double evaluate();

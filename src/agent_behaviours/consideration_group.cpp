@@ -65,6 +65,8 @@ double UtilityAIConsiderationGroup::evaluate() {
     int num_children = get_child_count();
     if( num_children < 1 ) return 0.0;
     double child_score = 0.0;
+    double child_weight = 1.0;
+    double sum_child_weight = 1.0;
     for( int i = 0; i < num_children; ++i ) {
         Node* node = get_child(i);
         if( node == nullptr ) continue;
@@ -72,6 +74,7 @@ double UtilityAIConsiderationGroup::evaluate() {
         if( considerationNode == nullptr ) continue;
         if( !considerationNode->get_is_active() ) continue;
         child_score = considerationNode->evaluate(); //agent, delta);
+        child_weight = considerationNode->get_weight();
         if( considerationNode->get_has_vetoed()) {
             _score = 0.0;
             _has_vetoed = true;
@@ -117,13 +120,18 @@ double UtilityAIConsiderationGroup::evaluate() {
                 }
             }
             break;
-            default: _score += child_score;
+            default: 
+            {
+              _score += child_score * child_weight;
+              sum_child_weight += child_weight;
+
+            }
         }//end switch evaluation method
         
     }//endfor children
 
     if( _evaluation_method == UtilityAIConsiderationGroupEvaluationMethod::Mean ) {
-        _score = _score / ((double)num_children);
+        _score = _score / sum_child_weight;
     }
 
     if( _invert_score ) {

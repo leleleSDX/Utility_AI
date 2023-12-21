@@ -23,9 +23,6 @@ void UtilityAIConsideration::_bind_methods() {
     ClassDB::bind_method(D_METHOD("get_activation_input_value"), &UtilityAIConsideration::get_activation_input_value);
     ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "activation_input_value", PROPERTY_HINT_RANGE, "0.0,1.0,or_less,or_greater"), "set_activation_input_value","get_activation_input_value");
 
-    ClassDB::bind_method(D_METHOD("set_weight", "weight"), &UtilityAIConsideration::set_weight);
-    ClassDB::bind_method(D_METHOD("get_weight"), &UtilityAIConsideration::get_weight);
-    ADD_PROPERTY(PropertyInfo(Variant::FLOAT, "weight", PROPERTY_HINT_NONE ), "set_weight","get_weight");
 
     ClassDB::bind_method(D_METHOD("sample_activation_curve", "input_value"), &UtilityAIConsideration::sample_activation_curve);
 }
@@ -37,8 +34,6 @@ UtilityAIConsideration::UtilityAIConsideration() {
     _activation_input_value = 0.0;
     _input_sensor = nullptr;
     _has_custom_evaluation_method = false;
-    _weight = 1.0;
-    
 }
 
 
@@ -75,13 +70,6 @@ double UtilityAIConsideration::get_activation_input_value() const {
     return _activation_input_value;
 }
 
-void UtilityAIConsideration::set_weight( double weight ) {
-    _weight = weight;
-}
-
-double UtilityAIConsideration::get_weight() const {
-    return _weight;
-}
 
 /**
 void UtilityAIConsideration::_notification(int p_what) {
