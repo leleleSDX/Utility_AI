@@ -20,6 +20,7 @@ protected:
     UtilityAISensors* _input_sensor;
     Ref<Curve>        _activation_curve;
     double            _activation_input_value;
+    double            _weight;
     bool              _has_custom_evaluation_method;
 
     virtual void _evaluate_consideration();
@@ -39,6 +40,8 @@ public:
     void set_activation_input_value( double activation_input_value );
     double get_activation_input_value() const;
 
+    void set_weight( double weight );
+    double get_weight() const;
             
     // Godot virtuals.
     //void _notification( int p_what );
